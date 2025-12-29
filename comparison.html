@@ -1,0 +1,396 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Language Comparison</title>
+
+  <style>
+    
+
+    
+    body{
+    margin: 0;
+    background-color: hsl(190.43deg 41.82% 89.22%);
+    font-family: 'Courier New', Courier, monospace;
+    }
+
+    .navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+    z-index: 1000;
+    }
+
+    .nav-left{
+    display: flex;
+    gap: 32px; 
+    }
+
+    .nav-link{
+    text-decoration: none;
+    color: #222;
+    padding: 18px 4px; 
+    position: relative;
+    font-size: 14px;
+    }
+
+    .nav-link.active::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 8px;      
+    width: 100%;
+    height: 2px;
+    background: #2f6fcd; 
+    border-radius: 2px;
+    }
+    .nav-link:hover{
+    color: #2f6fcd;  
+    }
+
+    .lang{
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+    }
+
+    
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 16px 50px;
+    }
+
+    h1 {
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.12);
+      box-shadow: 0 10px 22px rgba(0,0,0,.12);
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 50px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: #51606c;
+    }
+
+    select {
+      width: 240px;
+      max-width: 70vw;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.12);
+      background: #fff;
+    }
+
+    button {
+      height: 42px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.12);
+      background: #fff;
+      cursor: pointer;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      margin-top: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.12);
+      background: #fff;
+    }
+  </style>
+</head>
+
+<body>
+
+     <nav class="navbar">
+    <div class="nav-left">
+      <a class="nav-link" href="#">Home</a>
+      <a class="nav-link" href="#">Languages</a>
+      <a class="nav-link active" href="/comparison.html">Comparison</a>
+      <a class="nav-link" href="#">About Us</a>
+    </div>
+    </nav>
+
+
+  <main class="container">
+    <section>
+      <h1>Compare Two Programming Languages</h1>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <div>
+          <label for="langA" class="lang">Language A</label>
+          <select id="langA"></select>
+        </div>
+
+        <div>
+          <label for="langB" class="lang">Language B</label>
+          <select id="langB"></select>
+        </div>
+
+        <button id="compareBtn" type="button">Compare</button>
+      </div>
+
+      <canvas id="chart"></canvas>
+    </section>
+  </main>
+
+  <script>
+
+    const data = {
+    "C#": {
+        efficiency: 78,
+        performance: 80,
+        memoryUsage: 65
+    },
+    "Java": {
+        efficiency: 75,
+        performance: 78,
+        memoryUsage: 70
+    },
+    "Go": {
+        efficiency: 85,
+        performance: 88,
+        memoryUsage: 40
+    },
+    "JavaScript": {
+        efficiency: 70,
+        performance: 65,
+        memoryUsage: 75
+    },
+    "Python": {
+        efficiency: 68,
+        performance: 60,
+        memoryUsage: 80
+    },
+    "PHP": {
+        efficiency: 65,
+        performance: 62,
+        memoryUsage: 78
+    }
+    };
+
+
+   const categories = [
+    { key: "memoryUsage", label: "Memory usage" },
+    { key: "efficiency",  label: "Efficiency"  },
+    { key: "performance", label: "Performance"  }
+    ];
+
+    const colorA = "#6EC6FF";
+    const colorB = "#7DDA87";
+
+
+    const langA = document.getElementById("langA");
+    const langB = document.getElementById("langB");
+    const btn   = document.getElementById("compareBtn");
+
+    const canvas = document.getElementById("chart");
+    const ctx = canvas.getContext("2d");
+
+    let animId = null;
+
+    function fillSelect(selectEl) {
+      const ph = document.createElement("option");
+      ph.value = "";
+      ph.textContent = "Select...";
+      ph.disabled = true;
+      ph.selected = true;
+      selectEl.appendChild(ph);
+
+      Object.keys(data).forEach(function(name) {
+        selectEl.appendChild(new Option(name, name));
+      });
+      /* or 
+        const languages = Object.keys(data);
+
+        for (let i = 0; i < languages.length; i++) {
+        const name = languages[i];
+        selectEl.appendChild(new Option(name, name));
+        } */
+    }
+
+    function setupCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      const W = canvas.parentElement.clientWidth;
+      const H = 380;
+
+      canvas.style.width = W + "px";
+      canvas.style.height = H + "px";
+
+      canvas.width = Math.floor(W * dpr);
+      canvas.height = Math.floor(H * dpr);
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { W, H };
+    }
+
+    function getMinMax(key) {
+    const values = Object.values(data).map(function (v) {
+        return v[key];
+    });
+
+    return { min: Math.min(...values), max: Math.max(...values) };
+    }
+
+
+   function score(value, min, max) {
+    if (max === min) return 1;
+    return (value - min) / (max - min); 
+    }
+
+
+    function drawEmpty() {
+      const { W, H } = setupCanvas();
+      ctx.clearRect(0, 0, W, H);
+
+      ctx.fillStyle = "#17212b";
+      ctx.font = "16px Arial";
+      ctx.fillText("Chart is empty", 30, 60);
+
+      ctx.fillStyle = "#51606c";
+      ctx.font = "13px Arial";
+      ctx.fillText("Select A and B then click Compare.", 30, 85);
+    }
+
+    function draw(aName, bName, p = 1) {
+      const { W, H } = setupCanvas();
+      ctx.clearRect(0, 0, W, H);
+
+      const pad = { left: 60, right: 20, top: 45, bottom: 60 };
+      const chartW = W - pad.left - pad.right;
+      const chartH = H - pad.top - pad.bottom;
+      const baseY  = H - pad.bottom;
+
+      ctx.fillStyle = "#17212b";
+      ctx.font = "18px Arial";
+      ctx.fillText(`${aName} vs ${bName}`, pad.left, 28);
+
+      const groupGap = 70;
+      const barGap = 18;
+      const groupW = (chartW - groupGap * (categories.length - 1)) / categories.length;
+
+      const barW = Math.min(34, (groupW - barGap) / 2);
+      const startOffset = (groupW - (barW * 2 + barGap)) / 2;
+
+      categories.forEach((c, i) => {
+        const gx = pad.left + i * (groupW + groupGap) + startOffset;
+
+        const aVal = data[aName][c.key];
+        const bVal = data[bName][c.key];
+        const { min, max } = getMinMax(c.key);
+
+        const aScore = Math.max(score(aVal, min, max), 0.02);
+        const bScore = Math.max(score(bVal, min, max), 0.02);
+
+
+        const aH = aScore * chartH * p;
+        const bH = bScore * chartH * p;
+
+        const ax = gx;
+        const bx = gx + barW + barGap;
+
+        ctx.fillStyle = colorA;
+        ctx.fillRect(ax, baseY - aH, barW, aH);
+
+        ctx.fillStyle = colorB;
+        ctx.fillRect(bx, baseY - bH, barW, bH);
+
+        if (p > 0.85) {
+          ctx.fillStyle = "#17212b";
+          ctx.font = "12px Arial";
+          ctx.fillText(`${Math.round(aVal)}%`, ax, baseY - aH - 8);
+          ctx.fillText(`${Math.round(bVal)}%`, bx, baseY - bH - 8);
+        }
+
+
+        ctx.fillStyle = "#17212b";
+        ctx.font = "14px Arial";
+        const tx = pad.left + i * (groupW + groupGap) + groupW / 2 - ctx.measureText(c.label).width / 2;
+        ctx.fillText(c.label, tx, H - 25);
+      });
+
+    
+      ctx.font = "13px Arial";
+      const box = 10, gap = 6, space = 18;
+
+      const wA = ctx.measureText("A").width;
+      const wB = ctx.measureText("B").width;
+
+      const legendW = box + gap + wA + space + box + gap + wB;
+      let x = W - pad.right - legendW - 10;
+      if (x < pad.left) x = pad.left;
+      const y = 14;
+
+      ctx.fillStyle = colorA;
+      ctx.fillRect(x, y, box, box);
+      ctx.fillStyle = "#17212b";
+      ctx.fillText("A", x + box + gap, y + box - 1);
+
+      const bx = x + box + gap + wA + space;
+      ctx.fillStyle = colorB;
+      ctx.fillRect(bx, y, box, box);
+      ctx.fillStyle = "#17212b";
+      ctx.fillText("B", bx + box + gap, y + box - 1);
+    }
+
+    function animate(a, b) {
+      if (animId) cancelAnimationFrame(animId);
+
+      const duration = 600;
+      let start = 0;
+
+      function frame(t) {
+        if (!start) start = t;
+        const p = Math.min((t - start) / duration, 1); // 0 -> 1
+        draw(a, b, p);
+        if (p < 1) animId = requestAnimationFrame(frame);
+      }
+
+      animId = requestAnimationFrame(frame);
+    }
+
+    fillSelect(langA);
+    fillSelect(langB);
+    drawEmpty();
+
+    btn.addEventListener("click", () => {
+      const a = langA.value;
+      const b = langB.value;
+      animate(a, b);
+    });
+    
+  </script>
+</body>
+</html>
