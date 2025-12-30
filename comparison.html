@@ -168,38 +168,29 @@
 
   <script>
 
-    const data = {
-    "C#": {
-        efficiency: 78,
-        performance: 80,
-        memoryUsage: 65
-    },
-    "Java": {
-        efficiency: 75,
-        performance: 78,
-        memoryUsage: 70
-    },
-    "Go": {
-        efficiency: 85,
-        performance: 88,
-        memoryUsage: 40
-    },
-    "JavaScript": {
-        efficiency: 70,
-        performance: 65,
-        memoryUsage: 75
-    },
-    "Python": {
-        efficiency: 68,
-        performance: 60,
-        memoryUsage: 80
-    },
-    "PHP": {
-        efficiency: 65,
-        performance: 62,
-        memoryUsage: 78
+    let data = {};
+
+    async function loadLanguagesData() {
+      try {
+        const response = await fetch('ComparisonData.json');
+        const jsonData = await response.json();
+        
+        data = {};
+        jsonData.languages.forEach(lang => {
+          data[lang.name] = {
+            efficiency: lang.efficiency,
+            performance: lang.performance,
+            memoryUsage: lang.memoryUsage
+          };
+        });
+        
+        fillSelect(langA);
+        fillSelect(langB);
+        drawEmpty();
+      } catch (error) {
+        console.error(error);
+      }
     }
-    };
 
 
    const categories = [
@@ -381,14 +372,14 @@
       animId = requestAnimationFrame(frame);
     }
 
-    fillSelect(langA);
-    fillSelect(langB);
-    drawEmpty();
+    loadLanguagesData();
 
     btn.addEventListener("click", () => {
       const a = langA.value;
       const b = langB.value;
-      animate(a, b);
+      if (a && b) {
+        animate(a, b);
+      }
     });
     
   </script>
