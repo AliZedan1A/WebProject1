@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C# Language</title>
+  <link rel="stylesheet" href="CS_Style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a class="nav-link" href="/home.html">Home</a>
+      <a class="nav-link active" href="#">Languages</a>
+      <a class="nav-link" href="#">Comparison</a>
+      <a class="nav-link" href="#">About Us</a>
+    </div>
+  </nav>
+
+  <!-- Language Icons Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a class="nav-link" href="home.html">Home</a>
+      <div class="languages-icons">
+        <a href="C#.html"><img src="Icons/cs.png" alt="C#"></a>
+        <a href="Go.html"><img src="Icons/golang.png" alt="Go"></a>
+        <a href="Java.html"><img src="Icons/java.webp" alt="Java"></a>
+        <a href="JavaScript.html"><img src="Icons/javascript.webp" alt="JavaScript"></a>
+        <a href="PHP.html"><img src="Icons/php.png" alt="PHP"></a>
+        <a href="Python.html"><img src="Icons/python.png" alt="Python"></a>
+      </div>
+      <a class="nav-link" href="comparison.html">Comparison</a>
+      <a class="nav-link" href="about.html">About Us</a>
+    </div>
+  </nav>
+
+  <!-- Page Title -->
+  <h1 class="title">C# Language</h1>
+  <hr>
+
+  <!-- Intro -->
+  <div class="card1">
+    <p>
+      C# (pronounced C-Sharp) is a modern, object-oriented programming language developed by Microsoft.
+      It is mainly used for building Windows applications, web applications, and games.
+      C# is known for its strong typing, good performance, and ease of use, especially for developers working with the .NET framework.
+    </p>
+  </div>
+
+  <!-- Syntax Section -->
+  <section class="syntax-section">
+    <!-- Left Code Block -->
+    <div class="code-box left">
+      <div class="code-title">Basics</div>
+      <pre><code>
+        // Output text
+        Console.WriteLine("Hello World");
+
+        // To input number variables we use int, double, and float.
+        // Integers work only with whole numbers.
+        int age = 20;
+        // Double and float work for numbers with decimals.
+        double price = 15.5;
+        string name = "Ali";
+        bool isStudent = true;
+
+        // Arithmetic
+        int sum = age + 5;
+        Console.WriteLine(sum); // output = 25
+
+        // Comments
+        // This is a single line comment
+        /*
+          This is a multi-line comment.
+          It can span multiple lines
+          and include paragraphs of explanation.
+        */
+      </code></pre>
+    </div>
+
+    <!-- Right Code Block -->
+    <div class="code-box right">
+      <div class="code-title">Control Flow</div>
+      <pre><code>
+        // If-else statement
+        if(age >= 18)
+        {
+            Console.WriteLine("Adult");
+        }
+        else
+        {
+            Console.WriteLine("Minor");
+        }
+
+        // Loop - for
+        for(int i = 0; i < 5; i++)
+        {
+            Console.WriteLine("Count: " + i);
+        }
+
+        // Loop - while
+        int j = 0;
+        while(j < 3)
+        {
+            Console.WriteLine("While loop: " + j);
+            j++;
+        }
+
+        // Function
+        int AddNumbers(int a, int b)
+        {
+            return a + b;
+        }
+
+        Console.WriteLine("Sum: " + AddNumbers(5, 10));
+      </code></pre>
+    </div>
+  </section>
+
+  <!-- History Card -->
+  <div class="card1">
+    <h2>History</h2>
+    <p>
+      C# was developed by Microsoft in the late 1990s as part of the .NET initiative. 
+      The language was led by Anders Hejlsberg, a well-known software engineer.
+    </p>
+    <p>
+      C# was officially released in 2000 with the first version of the .NET Framework.
+      It was designed to be a modern, object-oriented, and type-safe language, 
+      combining the power of C++ with the simplicity of Visual Basic.
+    </p>
+    <p>
+      Since then, C# has evolved significantly with new versions introducing features like LINQ,
+      async/await, generics, and more, making it popular for desktop applications, web development,
+      and game development (especially with Unity).
+    </p>
+  </div>
+
+  <!-- Documentation Card -->
+  <div class="card2">
+    <h2>Documentation</h2>
+    <p>
+      C# documentation is officially maintained by Microsoft and is part of the .NET platform.
+      It provides detailed explanations of the C# language, its syntax, and how it works within
+      the .NET framework.
+    </p>
+    <p>
+      The documentation includes a language reference that explains keywords, data types,
+      operators, and control structures. This section is especially useful for beginners who
+      want to understand how C# code is written and structured.
+    </p>
+    <p>
+      In addition, the documentation contains a full API reference that lists all available
+      classes, methods, and namespaces. Developers can use it to learn how built-in features
+      like <code>Console.WriteLine()</code> and other .NET libraries work.
+    </p>
+    <p>
+      Microsoft also provides tutorials and guides that help developers build real applications
+      such as console programs, web applications, and games. These guides include examples that
+      can be tested directly in an IDE like Visual Studio or JetBrains Rider.
+    </p>
+    <p>
+      Official C# documentation can be found at:
+      <br>
+      <a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="_blank">
+        https://learn.microsoft.com/en-us/dotnet/csharp/
+      </a>
+    </p>
+  </div>
+
+</body>
+</html>
