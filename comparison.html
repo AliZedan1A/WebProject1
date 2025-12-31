@@ -6,9 +6,7 @@
   <title>Language Comparison</title>
 
   <style>
-    
 
-    
     body{
     margin: 0;
     background-color: hsl(190.43deg 41.82% 89.22%);
@@ -62,7 +60,6 @@
         font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
     }
 
-    
     .container {
       max-width: 1100px;
       margin: auto;
@@ -168,29 +165,38 @@
 
   <script>
 
-    let data = {};
-
-    async function loadLanguagesData() {
-      try {
-        const response = await fetch('ComparisonData.json');
-        const jsonData = await response.json();
-        
-        data = {};
-        jsonData.languages.forEach(lang => {
-          data[lang.name] = {
-            efficiency: lang.efficiency,
-            performance: lang.performance,
-            memoryUsage: lang.memoryUsage
-          };
-        });
-        
-        fillSelect(langA);
-        fillSelect(langB);
-        drawEmpty();
-      } catch (error) {
-        console.error(error);
-      }
+    const data = {
+    "C#": {
+        efficiency: 78,
+        performance: 80,
+        memoryUsage: 65
+    },
+    "Java": {
+        efficiency: 75,
+        performance: 78,
+        memoryUsage: 70
+    },
+    "Go": {
+        efficiency: 85,
+        performance: 88,
+        memoryUsage: 40
+    },
+    "JavaScript": {
+        efficiency: 70,
+        performance: 65,
+        memoryUsage: 75
+    },
+    "Python": {
+        efficiency: 68,
+        performance: 60,
+        memoryUsage: 80
+    },
+    "PHP": {
+        efficiency: 65,
+        performance: 62,
+        memoryUsage: 78
     }
+    };
 
 
    const categories = [
@@ -247,30 +253,14 @@
       return { W, H };
     }
 
-    function getMinMax(key) {
-    const values = Object.values(data).map(function (v) {
-        return v[key];
-    });
-
-    return { min: Math.min(...values), max: Math.max(...values) };
-    }
-
-
-   function score(value, min, max) {
-    if (max === min) return 1;
-    return (value - min) / (max - min); 
-    }
-
 
     function drawEmpty() {
       const { W, H } = setupCanvas();
       ctx.clearRect(0, 0, W, H);
 
-      ctx.fillStyle = "#17212b";
       ctx.font = "16px Arial";
       ctx.fillText("Chart is empty", 30, 60);
 
-      ctx.fillStyle = "#51606c";
       ctx.font = "13px Arial";
       ctx.fillText("Select A and B then click Compare.", 30, 85);
     }
@@ -283,10 +273,8 @@
       const chartW = W - pad.left - pad.right;
       const chartH = H - pad.top - pad.bottom;
       const baseY  = H - pad.bottom;
-
-      ctx.fillStyle = "#17212b";
       ctx.font = "18px Arial";
-      ctx.fillText(`${aName} vs ${bName}`, pad.left, 28);
+      ctx.fillText(aName + " vs " + bName, pad.left, 28);
 
       const groupGap = 70;
       const barGap = 18;
@@ -300,11 +288,8 @@
 
         const aVal = data[aName][c.key];
         const bVal = data[bName][c.key];
-        const { min, max } = getMinMax(c.key);
-
-        const aScore = Math.max(score(aVal, min, max), 0.02);
-        const bScore = Math.max(score(bVal, min, max), 0.02);
-
+        const aScore = Math.max(aVal / 100, 0.02);
+        const bScore = Math.max(bVal / 100, 0.02);
 
         const aH = aScore * chartH * p;
         const bH = bScore * chartH * p;
@@ -321,10 +306,10 @@
         if (p > 0.85) {
           ctx.fillStyle = "#17212b";
           ctx.font = "12px Arial";
-          ctx.fillText(`${Math.round(aVal)}%`, ax, baseY - aH - 8);
-          ctx.fillText(`${Math.round(bVal)}%`, bx, baseY - bH - 8);
-        }
+          ctx.fillText(Math.round(aVal) + "%", ax, baseY - aH - 8);
+          ctx.fillText(Math.round(bVal) + "%", bx, baseY - bH - 8);
 
+        }
 
         ctx.fillStyle = "#17212b";
         ctx.font = "14px Arial";
@@ -357,29 +342,29 @@
     }
 
     function animate(a, b) {
-      if (animId) cancelAnimationFrame(animId);
+  if (animId) cancelAnimationFrame(animId);
 
-      const duration = 600;
-      let start = 0;
+  const duration = 600;
+  const start = performance.now();
 
-      function frame(t) {
-        if (!start) start = t;
-        const p = Math.min((t - start) / duration, 1); // 0 -> 1
-        draw(a, b, p);
-        if (p < 1) animId = requestAnimationFrame(frame);
-      }
+  function frame(now) {
+    const p = Math.min((now - start) / duration, 1);
+    draw(a, b, p);
+    if (p < 1) animId = requestAnimationFrame(frame);
+  }
 
-      animId = requestAnimationFrame(frame);
-    }
+  animId = requestAnimationFrame(frame);
+}
 
-    loadLanguagesData();
+
+    fillSelect(langA);
+    fillSelect(langB);
+    drawEmpty();
 
     btn.addEventListener("click", () => {
       const a = langA.value;
       const b = langB.value;
-      if (a && b) {
-        animate(a, b);
-      }
+      animate(a, b);
     });
     
   </script>
