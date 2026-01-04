@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programming Languages</title>
+  <link rel="stylesheet" href="languages-style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a class="nav-link" href="home.html">Home</a>
+      <a class="nav-link active" href="programming-languages.html">Languages</a>
+      <a class="nav-link" href="comparison.html">Comparison</a>
+      <a class="nav-link" href="#">About Us</a>
+    </div>
+  </nav>
+
+  <div class="language-selector-container">
+    <label for="languageSelect" class="select-label">Select a Programming Language:</label>
+    <select id="languageSelect" class="language-select">
+      <option value="">Choose a language...</option>
+    </select>
+  </div>
+
+  <div id="pageContent" class="page-content hidden">
+    <h1 class="title" id="pageTitle">Programming Language</h1>
+    <hr>
+
+    <div class="card1">
+      <div class="language-header">
+        <img id="languageIcon" src="" alt="" class="language-icon-img">
+        <p id="languageDescription"></p>
+      </div>
+    </div>
+
+    <section class="syntax-section">
+      <div class="code-box left">
+        <div class="code-title">Basics</div>
+        <pre><code id="basicsCode"></code></pre>
+      </div>
+
+      <div class="code-box right">
+        <div class="code-title">Control Flow</div>
+        <pre><code id="controlFlowCode"></code></pre>
+      </div>
+    </section>
+
+    <div class="card1">
+      <h2>History</h2>
+      <p id="historyContent"></p>
+    </div>
+
+    <div class="card2">
+      <h2>Documentation</h2>
+      <p id="documentationContent"></p>
+    </div>
+
+    <div class="card1">
+      <h2>Popular Frameworks</h2>
+      <ul id="frameworksList" class="frameworks-list"></ul>
+    </div>
+
+    <div class="card1">
+      <h2>Common Use Cases</h2>
+      <ul id="useCasesList" class="use-cases-list"></ul>
+    </div>
+  </div>
+
+  <div id="emptyState" class="empty-state">
+    <p>Please select a programming language from the dropdown above to view its details.</p>
+  </div>
+
+  <script>
+    let languagesData = [];
+
+    function getURLParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    fetch('languages-info.json')
+      .then(response => response.json())
+      .then(data => {
+        languagesData = data.languages;
+        populateLanguageSelect();
+        
+        const langParam = getURLParameter('lang');
+        if (langParam) {
+          const language = languagesData.find(lang => 
+            lang.name.toLowerCase() === langParam.toLowerCase()
+          );
+          if (language) {
+            document.getElementById('languageSelect').value = language.name;
+            displayLanguage(language.name);
+          }
+        }
+      })
+      .catch(error => {
+        console.error('Error loading languages data:', error);
+      });
+
+    function populateLanguageSelect() {
+      const select = document.getElementById('languageSelect');
+      languagesData.forEach(lang => {
+        const option = document.createElement('option');
+        option.value = lang.name;
+        option.textContent = lang.name;
+        select.appendChild(option);
+      });
+    }
+
+    function displayLanguage(languageName) {
+      const language = languagesData.find(lang => lang.name === languageName);
+      if (!language) return;
+
+      document.getElementById('pageContent').classList.remove('hidden');
+      document.getElementById('emptyState').classList.add('hidden');
+
+      document.getElementById('pageTitle').textContent = language.name + ' Language';
+
+      const iconImg = document.getElementById('languageIcon');
+      iconImg.src = language.icon;
+      iconImg.alt = language.name;
+
+      document.getElementById('languageDescription').textContent = language.description;
+
+      document.getElementById('basicsCode').textContent = language.basicsCode;
+      document.getElementById('controlFlowCode').textContent = language.controlFlowCode;
+
+      document.getElementById('historyContent').textContent = language.history;
+
+      const docContent = document.getElementById('documentationContent');
+      let docText = language.documentation;
+      const urlRegex = /(https?:\/\/[^\s]+)/g;
+      docText = docText.replace(urlRegex, '<a href="$1" target="_blank" style="color: #6EC6FF;">$1</a>');
+      docContent.innerHTML = docText;
+
+      const frameworksList = document.getElementById('frameworksList');
+      frameworksList.innerHTML = '';
+      if (language.frameworks && language.frameworks.length > 0) {
+        language.frameworks.forEach(framework => {
+          const li = document.createElement('li');
+          li.textContent = framework;
+          frameworksList.appendChild(li);
+        });
+      }
+
+      const useCasesList = document.getElementById('useCasesList');
+      useCasesList.innerHTML = '';
+      if (language.useCases && language.useCases.length > 0) {
+        language.useCases.forEach(useCase => {
+          const li = document.createElement('li');
+          li.textContent = useCase;
+          useCasesList.appendChild(li);
+        });
+      }
+    }
+
+    document.getElementById('languageSelect').addEventListener('change', function(e) {
+      if (e.target.value) {
+        const newUrl = window.location.pathname + '?lang=' + encodeURIComponent(e.target.value);
+        window.history.pushState({ path: newUrl }, '', newUrl);
+        displayLanguage(e.target.value);
+      } else {
+        window.history.pushState({ path: window.location.pathname }, '', window.location.pathname);
+        document.getElementById('pageContent').classList.add('hidden');
+        document.getElementById('emptyState').classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

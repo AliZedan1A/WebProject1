@@ -1,0 +1,70 @@
+{
+  "languages": [
+    {
+      "name": "C#",
+      "icon": "Icons/cs.png",
+      "description": "C# (pronounced C-Sharp) is a modern, object-oriented programming language developed by Microsoft. It is mainly used for building Windows applications, web applications, and games. C# is known for its strong typing, good performance, and ease of use, especially for developers working with the .NET framework.",
+      "history": "C# was developed by Microsoft in the late 1990s as part of the .NET initiative. The language was led by Anders Hejlsberg, a well-known software engineer. C# was officially released in 2000 with the first version of the .NET Framework. It was designed to be a modern, object-oriented, and type-safe language, combining the power of C++ with the simplicity of Visual Basic. Since then, C# has evolved significantly with new versions introducing features like LINQ, async/await, generics, and more, making it popular for desktop applications, web development, and game development (especially with Unity).",
+      "documentation": "C# documentation is officially maintained by Microsoft and is part of the .NET platform. It provides detailed explanations of the C# language, its syntax, and how it works within the .NET framework. The documentation includes a language reference that explains keywords, data types, operators, and control structures. Official C# documentation can be found at: https://learn.microsoft.com/en-us/dotnet/csharp/",
+      "frameworks": ["ASP.NET Core", "Blazor", "Entity Framework", "Xamarin", "Unity"],
+      "useCases": ["Web Applications", "Desktop Applications", "Game Development", "Mobile Apps", "Enterprise Software", "Microservices"],
+      "basicsCode": "// Output text\nConsole.WriteLine(\"Hello World\");\n\n// To input number variables we use int, double, and float.\n// Integers work only with whole numbers.\nint age = 20;\n// Double and float work for numbers with decimals.\ndouble price = 15.5;\nstring name = \"Ali\";\nbool isStudent = true;\n\n// Arithmetic\nint sum = age + 5;\nConsole.WriteLine(sum); // output = 25\n\n// Comments\n// This is a single line comment\n/*\n  This is a multi-line comment.\n  It can span multiple lines\n  and include paragraphs of explanation.\n*/",
+      "controlFlowCode": "// If-else statement\nif(age >= 18)\n{\n    Console.WriteLine(\"Adult\");\n}\nelse\n{\n    Console.WriteLine(\"Minor\");\n}\n\n// Loop - for\nfor(int i = 0; i < 5; i++)\n{\n    Console.WriteLine(\"Count: \" + i);\n}\n\n// Loop - while\nint j = 0;\nwhile(j < 3)\n{\n    Console.WriteLine(\"While loop: \" + j);\n    j++;\n}\n\n// Function\nint AddNumbers(int a, int b)\n{\n    return a + b;\n}\n\nConsole.WriteLine(\"Sum: \" + AddNumbers(5, 10));"
+    },
+    {
+      "name": "Java",
+      "icon": "Icons/java.webp",
+      "description": "Java is a stable and widely used language, commonly used in enterprise applications, Android development, and large systems. It is known for its 'write once, run anywhere' philosophy.",
+      "history": "Java was developed by James Gosling and his team at Sun Microsystems in the early 1990s. It was originally designed for interactive television, but was too advanced for the digital cable television industry at the time. Java was first released in 1995 as a core component of Sun Microsystems' Java platform. The language derives much of its syntax from C and C++, but has a simpler object model and fewer low-level facilities.",
+      "documentation": "Java documentation is maintained by Oracle Corporation. The official Java documentation provides comprehensive guides, API references, and tutorials. Java documentation can be found at: https://docs.oracle.com/javase/",
+      "frameworks": ["Spring Boot", "Hibernate", "Struts", "JSF", "Play Framework"],
+      "useCases": ["Enterprise Applications", "Android Development", "Web Applications", "Big Data Processing", "Banking Systems", "E-commerce Platforms"],
+      "basicsCode": "// Output text\nSystem.out.println(\"Hello World\");\n\n// Variables\nint age = 20;\ndouble price = 15.5;\nString name = \"Ali\";\nboolean isStudent = true;\n\n// Arithmetic\nint sum = age + 5;\nSystem.out.println(sum); // output = 25",
+      "controlFlowCode": "// If-else statement\nif(age >= 18) {\n    System.out.println(\"Adult\");\n} else {\n    System.out.println(\"Minor\");\n}\n\n// Loop - for\nfor(int i = 0; i < 5; i++) {\n    System.out.println(\"Count: \" + i);\n}\n\n// Function\npublic int addNumbers(int a, int b) {\n    return a + b;\n}"
+    },
+    {
+      "name": "Go",
+      "icon": "Icons/golang.png",
+      "description": "Go is a fast and efficient language created by Google, designed for building scalable and high-performance backend systems. It combines the ease of programming of an interpreted, dynamically typed language with the efficiency and safety of a statically typed, compiled language.",
+      "history": "Go was developed by Google engineers Robert Griesemer, Rob Pike, and Ken Thompson in 2007. It was publicly announced in 2009 and version 1.0 was released in 2012. Go was designed to address Google's needs for a language that could handle large-scale software development efficiently.",
+      "documentation": "Go documentation is maintained by the Go team at Google. The official documentation provides language specification, package documentation, and tutorials. Go documentation can be found at: https://go.dev/doc/",
+      "frameworks": ["Gin", "Echo", "Fiber", "Beego", "Revel"],
+      "useCases": ["Backend Services", "Microservices", "Cloud Services", "API Development", "DevOps Tools", "System Programming"],
+      "basicsCode": "package main\n\nimport \"fmt\"\n\n// Output text\nfmt.Println(\"Hello World\")\n\n// Variables\nvar age int = 20\nprice := 15.5\nname := \"Ali\"\nisStudent := true\n\n// Arithmetic\nsum := age + 5\nfmt.Println(sum) // output = 25",
+      "controlFlowCode": "// If-else statement\nif age >= 18 {\n    fmt.Println(\"Adult\")\n} else {\n    fmt.Println(\"Minor\")\n}\n\n// Loop - for\nfor i := 0; i < 5; i++ {\n    fmt.Println(\"Count:\", i)\n}\n\n// Function\nfunc addNumbers(a int, b int) int {\n    return a + b\n}"
+    },
+    {
+      "name": "JavaScript",
+      "icon": "Icons/javascript.webp",
+      "description": "JavaScript is the core language of the web, used to create interactive user interfaces and dynamic web applications. It is one of the most popular programming languages in the world.",
+      "history": "JavaScript was created by Brendan Eich in 1995 while working at Netscape Communications. It was originally called Mocha, then LiveScript, and finally JavaScript. JavaScript was standardized as ECMAScript in 1997. Today, JavaScript is used both on the client-side and server-side.",
+      "documentation": "JavaScript documentation is maintained by MDN (Mozilla Developer Network) and is considered the most comprehensive resource. JavaScript documentation can be found at: https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+      "frameworks": ["React", "Vue.js", "Angular", "Node.js", "Express"],
+      "useCases": ["Web Development", "Frontend Development", "Backend Development", "Mobile Apps (React Native)", "Desktop Apps (Electron)", "Real-time Applications"],
+      "basicsCode": "// Output text\nconsole.log(\"Hello World\");\n\n// Variables\nlet age = 20;\nconst price = 15.5;\nlet name = \"Ali\";\nlet isStudent = true;\n\n// Arithmetic\nlet sum = age + 5;\nconsole.log(sum); // output = 25",
+      "controlFlowCode": "// If-else statement\nif(age >= 18) {\n    console.log(\"Adult\");\n} else {\n    console.log(\"Minor\");\n}\n\n// Loop - for\nfor(let i = 0; i < 5; i++) {\n    console.log(\"Count: \" + i);\n}\n\n// Function\nfunction addNumbers(a, b) {\n    return a + b;\n}"
+    },
+    {
+      "name": "Python",
+      "icon": "Icons/python.png",
+      "description": "Python is an easy-to-learn and versatile language, widely used in data science, artificial intelligence, and automation. It emphasizes code readability and simplicity.",
+      "history": "Python was created by Guido van Rossum and first released in 1991. It was designed with an emphasis on code readability and a syntax that allows programmers to express concepts in fewer lines of code. Python's design philosophy emphasizes code readability, notably using significant whitespace.",
+      "documentation": "Python documentation is maintained by the Python Software Foundation. The official Python documentation is comprehensive and well-maintained. Python documentation can be found at: https://docs.python.org/",
+      "frameworks": ["Django", "Flask", "FastAPI", "PyTorch", "TensorFlow"],
+      "useCases": ["Web Development", "Data Science", "Machine Learning", "Artificial Intelligence", "Automation Scripts", "Scientific Computing"],
+      "basicsCode": "# Output text\nprint(\"Hello World\")\n\n# Variables\nage = 20\nprice = 15.5\nname = \"Ali\"\nis_student = True\n\n# Arithmetic\nsum = age + 5\nprint(sum)  # output = 25",
+      "controlFlowCode": "# If-else statement\nif age >= 18:\n    print(\"Adult\")\nelse:\n    print(\"Minor\")\n\n# Loop - for\nfor i in range(5):\n    print(f\"Count: {i}\")\n\n# Function\ndef add_numbers(a, b):\n    return a + b"
+    },
+    {
+      "name": "PHP",
+      "icon": "Icons/php.png",
+      "description": "PHP is a popular server-side scripting language mainly used for building dynamic websites and web applications. It is especially suited for web development and can be embedded into HTML.",
+      "history": "PHP was created by Rasmus Lerdorf in 1994. It originally stood for 'Personal Home Page' but now stands for 'PHP: Hypertext Preprocessor'. PHP has evolved significantly over the years and is now used by millions of websites worldwide, including major platforms like WordPress and Facebook.",
+      "documentation": "PHP documentation is maintained by the PHP Documentation Group. The official PHP documentation is comprehensive and includes a function reference. PHP documentation can be found at: https://www.php.net/docs.php",
+      "frameworks": ["Laravel", "Symfony", "CodeIgniter", "Yii", "Zend Framework"],
+      "useCases": ["Web Development", "Content Management Systems", "E-commerce Platforms", "Blogging Platforms", "API Development", "Server-side Scripting"],
+      "basicsCode": "<?php\n// Output text\necho \"Hello World\";\n\n// Variables\n$age = 20;\n$price = 15.5;\n$name = \"Ali\";\n$isStudent = true;\n\n// Arithmetic\n$sum = $age + 5;\necho $sum; // output = 25\n?>",
+      "controlFlowCode": "<?php\n// If-else statement\nif($age >= 18) {\n    echo \"Adult\";\n} else {\n    echo \"Minor\";\n}\n\n// Loop - for\nfor($i = 0; $i < 5; $i++) {\n    echo \"Count: \" . $i;\n}\n\n// Function\nfunction addNumbers($a, $b) {\n    return $a + $b;\n}\n?>"
+    }
+  ]
+}

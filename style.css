@@ -51,62 +51,111 @@ color: #2f6fcd;
   font-family: 'Inter', sans-serif;
   text-align: center;
   margin: auto;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 90px;
+  margin-bottom: 40px;
+  font-size: 32px;
+  font-weight: 600;
+  color: #222;
 }
+
 .cards-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr); 
-  gap: 20px;
-   max-width: 1100px;
-  width: 75%;
-  margin: auto;
+  gap: 24px;
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto 50px;
+  padding: 0 20px;
 }
+
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
   background: white;
-  border-radius: 12px;
-  padding: 30px 25px;
+  border-radius: 16px;
+  padding: 32px 24px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.05);
 }
+
 .card:hover{
-    box-shadow: 0 4px 10px rgba(0,0,0,2);
-    cursor:pointer;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  cursor: pointer;
 }
 
 .card .icon{
- background: transparent;
+  background: transparent;
+  transition: transform 0.3s ease;
+  margin-bottom: 8px;
 }
+
+.card:hover .icon{
+  transform: scale(1.1);
+}
+
 .card h5{
   font-family: 'Poppins', sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
-  margin-top: 12px;
+  margin-top: 16px;
+  margin-bottom: 8px;
   color: #222;
-
 }
+
 .view-btn{
-  margin-top: 10%;
+  margin-top: 20px;
   background: transparent;
-  border:1.5px solid #2f6fcd;
+  border: 2px solid #2f6fcd;
   color: #2f6fcd;
-  padding: 6px 14px;
-  font-size: 12px;
-  border-radius: 20px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 24px;
   cursor: pointer;
-  font-family: inherit;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
 }
 
 .view-btn:hover{
-  background-color: hsl(190.43deg 41.82% 89.22%);
+  background-color: #2f6fcd;
+  color: white;
+  transform: scale(1.05);
 }
+
 .card p{
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  color: #777;
-  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666;
+  margin-top: 8px;
+  flex-grow: 1;
+}
 
+@media (max-width: 1024px) {
+  .cards-container{
+    grid-template-columns: repeat(2, 1fr);
+    width: 85%;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-container{
+    grid-template-columns: 1fr;
+    width: 90%;
+    gap: 20px;
+  }
+  
+  .title{
+    font-size: 28px;
+    margin-top: 80px;
+    margin-bottom: 30px;
+  }
+  
+  .card{
+    padding: 28px 20px;
+  }
 }

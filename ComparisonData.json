@@ -6,7 +6,8 @@
       "description": "C# is a powerful programming language developed by Microsoft, widely used for web, desktop, and game development.",
       "efficiency": 82,
       "performance": 85,
-      "memoryUsage": 72
+      "memoryUsage": 72,
+      "frameworks": ["ASP.NET Core", "Blazor", "Entity Framework", "Xamarin", "Unity"]
     },
     {
       "name": "Java",
@@ -14,7 +15,8 @@
       "description": "Java is a stable and widely used language, commonly used in enterprise applications, Android development, and large systems.",
       "efficiency": 80,
       "performance": 83,
-      "memoryUsage": 75
+      "memoryUsage": 75,
+      "frameworks": ["Spring Boot", "Hibernate", "Struts", "JSF", "Play Framework"]
     },
     {
       "name": "Go",
@@ -22,7 +24,8 @@
       "description": "Go is a fast and efficient language created by Google, designed for building scalable and high-performance backend systems.",
       "efficiency": 88,
       "performance": 92,
-      "memoryUsage": 35
+      "memoryUsage": 35,
+      "frameworks": ["Gin", "Echo", "Fiber", "Beego", "Revel"]
     },
     {
       "name": "JavaScript",
@@ -30,7 +33,8 @@
       "description": "JavaScript is the core language of the web, used to create interactive user interfaces and dynamic web applications.",
       "efficiency": 75,
       "performance": 68,
-      "memoryUsage": 70
+      "memoryUsage": 70,
+      "frameworks": ["React", "Vue.js", "Angular", "Node.js", "Express"]
     },
     {
       "name": "Python",
@@ -38,7 +42,8 @@
       "description": "Python is an easy-to-learn and versatile language, widely used in data science, artificial intelligence, and automation.",
       "efficiency": 90,
       "performance": 45,
-      "memoryUsage": 85
+      "memoryUsage": 85,
+      "frameworks": ["Django", "Flask", "FastAPI", "PyTorch", "TensorFlow"]
     },
     {
       "name": "PHP",
@@ -46,7 +51,8 @@
       "description": "PHP is a popular server-side scripting language mainly used for building dynamic websites and web applications.",
       "efficiency": 70,
       "performance": 50,
-      "memoryUsage": 78
+      "memoryUsage": 78,
+      "frameworks": ["Laravel", "Symfony", "CodeIgniter", "Yii", "Zend Framework"]
     }
   ]
 }

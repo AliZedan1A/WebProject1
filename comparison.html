@@ -124,19 +124,72 @@
       border: 1px solid rgba(0,0,0,.12);
       background: #fff;
     }
+
+    .frameworks-section {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0,0,0,.12);
+    }
+
+    .frameworks-section h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .frameworks-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .framework-group h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #2f6fcd;
+    }
+
+    .framework-group ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .framework-group li {
+      padding: 8px 12px;
+      margin-bottom: 6px;
+      background: #f5f5f5;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .frameworks-comparison {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-     <nav class="navbar">
+  <nav class="navbar">
     <div class="nav-left">
-      <a class="nav-link" href="#">Home</a>
-      <a class="nav-link" href="#">Languages</a>
-      <a class="nav-link active" href="/comparison.html">Comparison</a>
+      <a class="nav-link" href="home.html">Home</a>
+      <a class="nav-link" href="programming-languages.html">Languages</a>
+      <a class="nav-link active" href="comparison.html">Comparison</a>
       <a class="nav-link" href="#">About Us</a>
     </div>
-    </nav>
+  </nav>
 
 
   <main class="container">
@@ -160,54 +213,35 @@
       </div>
 
       <canvas id="chart"></canvas>
+      
+      <div id="frameworksSection" class="frameworks-section hidden">
+        <h3>Popular Frameworks</h3>
+        <div class="frameworks-comparison">
+          <div class="framework-group">
+            <h4 id="langAFrameworksTitle"></h4>
+            <ul id="langAFrameworks"></ul>
+          </div>
+          <div class="framework-group">
+            <h4 id="langBFrameworksTitle"></h4>
+            <ul id="langBFrameworks"></ul>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
   <script>
 
-    const data = {
-    "C#": {
-        efficiency: 78,
-        performance: 80,
-        memoryUsage: 65
-    },
-    "Java": {
-        efficiency: 75,
-        performance: 78,
-        memoryUsage: 70
-    },
-    "Go": {
-        efficiency: 85,
-        performance: 88,
-        memoryUsage: 40
-    },
-    "JavaScript": {
-        efficiency: 70,
-        performance: 65,
-        memoryUsage: 75
-    },
-    "Python": {
-        efficiency: 68,
-        performance: 60,
-        memoryUsage: 80
-    },
-    "PHP": {
-        efficiency: 65,
-        performance: 62,
-        memoryUsage: 78
-    }
-    };
-
-
-   const categories = [
-    { key: "memoryUsage", label: "Memory usage" },
-    { key: "efficiency",  label: "Efficiency"  },
-    { key: "performance", label: "Performance"  }
+    let data = {};
+    
+    const categories = [
+      { key: "memoryUsage", label: "Memory usage" },
+      { key: "efficiency",  label: "Efficiency"  },
+      { key: "performance", label: "Performance"  }
     ];
 
     const colorA = "#6EC6FF";
     const colorB = "#7DDA87";
-
 
     const langA = document.getElementById("langA");
     const langB = document.getElementById("langB");
@@ -229,13 +263,6 @@
       Object.keys(data).forEach(function(name) {
         selectEl.appendChild(new Option(name, name));
       });
-      /* or 
-        const languages = Object.keys(data);
-
-        for (let i = 0; i < languages.length; i++) {
-        const name = languages[i];
-        selectEl.appendChild(new Option(name, name));
-        } */
     }
 
     function setupCanvas() {
@@ -357,14 +384,71 @@
 }
 
 
-    fillSelect(langA);
-    fillSelect(langB);
     drawEmpty();
+
+    let comparisonData = {};
+
+    fetch('ComparisonData.json')
+      .then(response => response.json())
+      .then(jsonData => {
+        const dataObj = {};
+        jsonData.languages.forEach(lang => {
+          dataObj[lang.name] = {
+            efficiency: lang.efficiency,
+            performance: lang.performance,
+            memoryUsage: lang.memoryUsage
+          };
+          comparisonData[lang.name] = lang;
+        });
+        data = dataObj;
+        
+        fillSelect(langA);
+        fillSelect(langB);
+      })
+      .catch(error => {
+        console.error('Error loading data:', error);
+        data = {};
+      });
+
+    function displayFrameworks(aName, bName) {
+      const frameworksSection = document.getElementById('frameworksSection');
+      const langAFrameworks = document.getElementById('langAFrameworks');
+      const langBFrameworks = document.getElementById('langBFrameworks');
+      const langAFrameworksTitle = document.getElementById('langAFrameworksTitle');
+      const langBFrameworksTitle = document.getElementById('langBFrameworksTitle');
+
+      if (comparisonData[aName] && comparisonData[aName].frameworks && 
+          comparisonData[bName] && comparisonData[bName].frameworks) {
+        frameworksSection.classList.remove('hidden');
+        
+        langAFrameworksTitle.textContent = aName + ' Frameworks';
+        langBFrameworksTitle.textContent = bName + ' Frameworks';
+        
+        langAFrameworks.innerHTML = '';
+        comparisonData[aName].frameworks.forEach(framework => {
+          const li = document.createElement('li');
+          li.textContent = framework;
+          langAFrameworks.appendChild(li);
+        });
+
+        langBFrameworks.innerHTML = '';
+        comparisonData[bName].frameworks.forEach(framework => {
+          const li = document.createElement('li');
+          li.textContent = framework;
+          langBFrameworks.appendChild(li);
+        });
+      } else {
+        frameworksSection.classList.add('hidden');
+      }
+    }
 
     btn.addEventListener("click", () => {
       const a = langA.value;
       const b = langB.value;
-      animate(a, b);
+      if (a && b) {
+        animate(a, b);
+        displayFrameworks(a, b);
+      }
     });
     
   </script>
