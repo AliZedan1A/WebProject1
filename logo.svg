@@ -1,0 +1,21 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular outline -->
+  <circle cx="60" cy="60" r="55" fill="none" stroke="#1a3a5f" stroke-width="3"/>
+  
+  <!-- Left bracket (<) in dark blue -->
+  <path d="M 35 40 L 25 60 L 35 80" fill="none" stroke="#1a3a5f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Right bracket (>) in mint green -->
+  <path d="M 85 40 L 95 60 L 85 80" fill="none" stroke="#7DDA87" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Compass needle pointing up and slightly right -->
+  <g transform="translate(60, 60)">
+    <!-- Main needle pointing up-right -->
+    <line x1="0" y1="0" x2="8" y2="-15" stroke="#1a3a5f" stroke-width="3" stroke-linecap="round"/>
+    <!-- Secondary needle pointing down-left -->
+    <line x1="0" y1="0" x2="-8" y2="15" stroke="#1a3a5f" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+    <!-- Pivot point -->
+    <circle cx="0" cy="0" r="3" fill="#1a3a5f"/>
+  </g>
+</svg>
+

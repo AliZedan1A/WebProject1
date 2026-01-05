@@ -3,7 +3,7 @@ function createNavbar(activePage = 'home') {
   navbar.className = 'navbar';
   
   navbar.innerHTML = `
-    <div class="nav-left">
+
       <a class="nav-link ${activePage === 'home' ? 'active' : ''}" href="home.html">Home</a>
       <a class="nav-link ${activePage === 'languages' ? 'active' : ''}" href="programming-languages.html">Languages</a>
       <a class="nav-link ${activePage === 'comparison' ? 'active' : ''}" href="comparison.html">Comparison</a>
