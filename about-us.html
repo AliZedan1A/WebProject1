@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>About Us - CodeCompass</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, rgba(26, 58, 95, 0.15) 0%, rgba(125, 218, 135, 0.2) 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .about-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 20px 50px;
+    }
+
+    .intro-section {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .intro-section h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: #1a3a5f;
+      margin-bottom: 20px;
+    }
+
+    .intro-section p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #555;
+      max-width: 800px;
+      margin: 0 auto;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .team-section {
+      margin-top: 60px;
+    }
+
+    .team-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      text-align: center;
+      color: #1a3a5f;
+      margin-bottom: 50px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .team-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #1a3a5f, #7DDA87);
+      border-radius: 2px;
+    }
+
+    .students-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 35px;
+      margin-top: 60px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .student-card {
+      background: white;
+      border-radius: 24px;
+      padding: 0;
+      text-align: left;
+      box-shadow: 0 8px 25px rgba(26, 58, 95, 0.12);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out both;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(26, 58, 95, 0.1);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .student-card:nth-child(1) { 
+      animation-delay: 0.2s;
+      background: linear-gradient(135deg, rgba(26, 58, 95, 0.03) 0%, rgba(255, 255, 255, 1) 100%);
+    }
+    .student-card:nth-child(2) { 
+      animation-delay: 0.3s;
+      background: linear-gradient(135deg, rgba(125, 218, 135, 0.03) 0%, rgba(255, 255, 255, 1) 100%);
+    }
+    .student-card:nth-child(3) { 
+      animation-delay: 0.4s;
+      background: linear-gradient(135deg, rgba(26, 58, 95, 0.03) 0%, rgba(255, 255, 255, 1) 100%);
+    }
+    .student-card:nth-child(4) { 
+      animation-delay: 0.5s;
+      background: linear-gradient(135deg, rgba(125, 218, 135, 0.03) 0%, rgba(255, 255, 255, 1) 100%);
+    }
+
+    .student-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #1a3a5f, #7DDA87);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .student-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .student-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(26, 58, 95, 0.25);
+      border-color: #7DDA87;
+    }
+
+    .card-header {
+      padding: 35px 35px 25px;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      position: relative;
+    }
+
+    .student-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #1a3a5f 0%, #7DDA87 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      font-weight: 700;
+      color: white;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 6px 20px rgba(26, 58, 95, 0.25);
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .student-avatar::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+    }
+
+    .student-card:hover .student-avatar {
+      transform: scale(1.08) rotate(-3deg);
+      box-shadow: 0 10px 30px rgba(125, 218, 135, 0.4);
+      border-radius: 16px;
+    }
+
+    .student-card:hover .student-avatar::after {
+      width: 200px;
+      height: 200px;
+    }
+
+    .student-info {
+      flex: 1;
+    }
+
+    .student-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #1a3a5f;
+      margin-bottom: 6px;
+      transition: color 0.3s ease;
+    }
+
+    .student-card:hover .student-name {
+      color: #7DDA87;
+    }
+
+    .student-id {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: #888;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .student-id::before {
+      content: '🆔';
+      font-size: 14px;
+    }
+
+    .student-contribution {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #555;
+      padding: 0 35px 35px;
+      margin-top: 0;
+      opacity: 1;
+      max-height: 500px;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(0);
+      background: linear-gradient(135deg, rgba(26, 58, 95, 0.03) 0%, rgba(125, 218, 135, 0.03) 100%);
+      border-radius: 0 0 24px 24px;
+      padding-top: 25px;
+      position: relative;
+    }
+
+    .student-contribution::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 35px;
+      right: 35px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(26, 58, 95, 0.2), transparent);
+    }
+
+    .contribution-icon {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 20px;
+      vertical-align: middle;
+    }
+
+    .contribution-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #1a3a5f, #7DDA87);
+      color: white;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      box-shadow: 0 3px 10px rgba(26, 58, 95, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .student-card:hover .contribution-badge {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(26, 58, 95, 0.3);
+    }
+
+    .student-contribution p {
+      margin: 0;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .student-card:nth-child(odd) .card-header {
+      animation: slideInLeft 0.6s ease-out both;
+    }
+
+    .student-card:nth-child(even) .card-header {
+      animation: slideInRight 0.6s ease-out both;
+    }
+
+    @media (max-width: 968px) {
+      .students-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .card-header {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .intro-section h1 {
+        font-size: 32px;
+      }
+      
+      .intro-section p {
+        font-size: 16px;
+      }
+
+      .student-card {
+        border-radius: 20px;
+      }
+
+      .card-header {
+        padding: 25px 25px 20px;
+      }
+
+      .student-contribution {
+        padding: 20px 25px 25px;
+      }
+    }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(125, 218, 135, 0.4);
+      transform: scale(0);
+      animation: rippleAnimation 0.6s ease-out;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes rippleAnimation {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="home.html" class="navbar-logo">
+      <img src="logo.svg" alt="CodeCompass Logo">
+      <span class="navbar-logo-text">
+        <span class="code">Code</span><span class="compass">Compass</span>
+      </span>
+    </a>
+    <div class="nav-left">
+      <a class="nav-link" href="home.html">Home</a>
+      <a class="nav-link" href="programming-languages.html">Languages</a>
+      <a class="nav-link" href="comparison.html">Comparison</a>
+      <a class="nav-link active" href="about-us.html">About Us</a>
+    </div>
+  </nav>
+
+  <div class="about-container">
+    <div class="intro-section">
+      <h1>About CodeCompass</h1>
+      <p>
+        نحن فريق من  مطورين الويب   متحمسون لاستكشاف عالم لغات البرمجة ومقارنتها. 
+        هذا الموقع هو نتاج عمل جماعي يهدف إلى تقديم معلومات شاملة ودقيقة حول مختلف لغات البرمجة، 
+        مع إتاحة أدوات تفاعلية للمقارنة بينها. نسعى جاهدين لتقديم تجربة تعليمية ممتعة ومفيدة لكل من يرغب 
+        في فهم الفروقات والخصائص المميزة لكل لغة برمجية.
+      </p>
+    </div>
+
+    <div class="team-section">
+      <h2>Our Team</h2>
+      <div class="students-grid">
+        
+        <div class="student-card">
+          <div class="card-header">
+            <div class="student-avatar">A</div>
+            <div class="student-info">
+              <div class="student-name">Ali Sohel Zedan</div>
+              <div class="student-id">202411893</div>
+            </div>
+          </div>
+          <div class="student-contribution">
+            <div class="contribution-badge">💻 Frontend Developer</div>
+            <p>
+              <span class="contribution-icon">⚙️</span>
+              عمل على إنشاء ملف JSON وإعداد البيانات + ربط JavaScript بجميع الملفات
+            </p>
+          </div>
+        </div>
+
+        <div class="student-card">
+          <div class="card-header">
+            <div class="student-avatar">M</div>
+            <div class="student-info">
+              <div class="student-name">Mohamed Ibrahem Zedan</div>
+              <div class="student-id">202411894</div>
+            </div>
+          </div>
+          <div class="student-contribution">
+            <div class="contribution-badge">🏠Frontend Developer</div>
+            <p>
+              <span class="contribution-icon">🎨</span>
+              قام بعمل صفحة Home + صفحة About Us
+            </p>
+          </div>
+        </div>
+
+        <div class="student-card">
+          <div class="card-header">
+            <div class="student-avatar">B</div>
+            <div class="student-info">
+              <div class="student-name">Baraa Nidal Mihdawi</div>
+              <div class="student-id">202512501</div>
+            </div>
+          </div>
+          <div class="student-contribution">
+            <div class="contribution-badge">📚 Frontend Developer</div>
+            <p>
+              <span class="contribution-icon">📖</span>
+              قام بعمل صفحة اللغات وعرض تفاصيل اللغات
+            </p>
+          </div>
+        </div>
+
+        <div class="student-card">
+          <div class="card-header">
+            <div class="student-avatar">E</div>
+            <div class="student-info">
+              <div class="student-name">Enas Khaled Alasi</div>
+              <div class="student-id">202511963</div>
+            </div>
+          </div>
+          <div class="student-contribution">
+            <div class="contribution-badge">📊 Frontend Developer</div>
+            <p>
+              <span class="contribution-icon">📈</span>
+              قامت بعمل صفحة المقارنة بكل تفاصيلها
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const studentCards = document.querySelectorAll('.student-card');
+      
+      // Add smooth scroll reveal animation
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+            }, index * 100);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      studentCards.forEach((card, index) => {
+        // Observe each card for scroll animations
+        observer.observe(card);
+        
+        // Add click ripple effect
+        card.addEventListener('click', function(e) {
+          const ripple = document.createElement('span');
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+          
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = x + 'px';
+          ripple.style.top = y + 'px';
+          ripple.classList.add('ripple');
+          
+          this.appendChild(ripple);
+          
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
+

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <title>About Us | CodeCompass</title>
+
+  <style>
+    .about-hero{display:flex;align-items:stretch;justify-content:space-between;gap:18px}
+    .about-hero-left{flex:1}
+    .about-hero-left h5{margin-bottom:8px}
+    .about-hero-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .ghost-btn{background:transparent!important;border:1.5px solid rgba(0,0,0,0.15)!important;color:inherit!important}
+    .about-hero-right{width:240px;display:flex;flex-direction:column;gap:10px}
+    .about-stat{border:1px solid rgba(0,0,0,0.08);border-radius:16px;padding:12px;display:flex;flex-direction:column;align-items:flex-start}
+    .about-number{font-size:1.8rem;font-weight:600}
+    .about-label{opacity:0.8;font-size:0.95rem}
+    .about-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .about-features{display:flex;flex-direction:column;gap:12px;margin-top:10px}
+    .about-feature{display:flex;gap:10px;align-items:flex-start}
+    .about-dot{width:10px;height:10px;border-radius:50%;background:rgba(0,0,0,0.25);margin-top:6px;flex:0 0 10px}
+    .about-badges{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 8px}
+    .about-badge{padding:7px 12px;border-radius:999px;border:1px solid rgba(0,0,0,0.10);font-size:0.95rem}
+    .about-note{opacity:0.85}
+    .about-form{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+    .about-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .about-input{font-family:inherit;padding:12px 14px;border-radius:14px;border:1px solid rgba(0,0,0,0.12);outline:none}
+    .about-textarea{min-height:115px;resize:vertical}
+    .about-status{margin-top:6px;font-size:0.95rem;opacity:0.9}
+    .about-status.ok{font-weight:500}
+    @media (max-width:900px){
+      .about-hero{flex-direction:column}
+      .about-hero-right{width:100%;flex-direction:row}
+      .about-stat{flex:1}
+    }
+    @media (max-width:700px){
+      .about-grid-2{grid-template-columns:1fr}
+      .about-row{grid-template-columns:1fr}
+      .about-hero-right{flex-direction:column}
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar-placeholder"></div>
+  <script src="navbar.js"></script>
+
+  <h1 class="title">About CodeCompass</h1>
+
+  <div class="cards-container">
+    <div class="card about-hero">
+      <div class="about-hero-left">
+        <h5>Learn. Compare. Choose.</h5>
+        <p>
+          CodeCompass is a student-friendly website that explains programming languages in a simple way,
+          then compares them clearly so you can pick the right language for your goals.
+        </p>
+        <div class="about-hero-actions">
+          <button class="view-btn" onclick="window.location.href='programming-languages.html'">Explore Languages</button>
+          <button class="view-btn ghost-btn" onclick="window.location.href='comparison.html'">Compare Now</button>
+        </div>
+      </div>
+
+      <div class="about-hero-right">
+        <div class="about-stat">
+          <span class="about-number" id="statLanguages">0</span>
+          <span class="about-label">Languages</span>
+        </div>
+        <div class="about-stat">
+          <span class="about-number" id="statComparisons">0</span>
+          <span class="about-label">Comparisons</span>
+        </div>
+        <div class="about-stat">
+          <span class="about-number" id="statTopics">0</span>
+          <span class="about-label">Topics</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-grid-2">
+      <div class="card">
+        <h5>Mission</h5>
+        <p>
+          Help students understand key programming concepts and language differences through clear,
+          organized information and real-world use cases.
+        </p>
+      </div>
+
+      <div class="card">
+        <h5>Vision</h5>
+        <p>
+          Build a simple reference that makes learning and choosing programming languages faster and easier
+          for beginners.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h5>Why CodeCompass?</h5>
+      <div class="about-features">
+        <div class="about-feature"><span class="about-dot"></span><div><strong>Simple Explanations:</strong> Easy content for beginners.</div></div>
+        <div class="about-feature"><span class="about-dot"></span><div><strong>Side-by-side Comparison:</strong> Syntax, speed, use-cases, and more.</div></div>
+        <div class="about-feature"><span class="about-dot"></span><div><strong>Clean Design:</strong> Modern UI that focuses on the content.</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h5>Technologies Used</h5>
+      <div class="about-badges">
+        <span class="about-badge">HTML</span>
+        <span class="about-badge">CSS</span>
+        <span class="about-badge">JavaScript</span>
+        <span class="about-badge">LocalStorage</span>
+      </div>
+      <p class="about-note">Built with pure web technologies (no frameworks) to demonstrate core skills.</p>
+    </div>
+
+    <div class="card">
+      <h5>Contact</h5>
+      <p class="about-note">Demo form (no backend). JavaScript will show a success message.</p>
+      <form class="about-form" id="contactForm">
+        <div class="about-row">
+          <input class="about-input" type="text" id="name" placeholder="Your Name" required />
+          <input class="about-input" type="email" id="email" placeholder="Your Email" required />
+        </div>
+        <textarea class="about-input about-textarea" id="message" placeholder="Your Message" required></textarea>
+        <button class="view-btn" type="submit">Send Message</button>
+        <p class="about-status" id="statusMsg"></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const animateNumber = (el, endValue, duration = 800) => {
+      const startValue = 0;
+      const startTime = performance.now();
+      const step = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        el.textContent = Math.floor(startValue + (endValue - startValue) * progress);
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    window.addEventListener("load", () => {
+      const langCount = Number(localStorage.getItem("languagesCount")) || 6;
+      const compareCount = Number(localStorage.getItem("comparisonsCount")) || 12;
+      const topicsCount = Number(localStorage.getItem("topicsCount")) || 20;
+
+      animateNumber(document.getElementById("statLanguages"), langCount);
+      animateNumber(document.getElementById("statComparisons"), compareCount);
+      animateNumber(document.getElementById("statTopics"), topicsCount);
+    });
+
+    document.getElementById("contactForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      const status = document.getElementById("statusMsg");
+      status.textContent = "Message sent successfully ✅ (Demo)";
+      status.classList.add("ok");
+      this.reset();
+      setTimeout(() => {
+        status.textContent = "";
+        status.classList.remove("ok");
+      }, 2500);
+    });
+  </script>
+</body>
+</html>
